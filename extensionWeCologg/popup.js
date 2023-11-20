@@ -1,3 +1,6 @@
+const ratingElement = document.getElementById('rating');
+ratingElement.textContent = 'Cargando datos...';
+
 browser.tabs.query({ active: true, currentWindow: true })
   .then(tabs => {
     const url = tabs[0].url;
@@ -5,7 +8,6 @@ browser.tabs.query({ active: true, currentWindow: true })
   })
   .then(response => response.json())
   .then(data => {
-    const ratingElement = document.getElementById('rating');
     const { rating } = data;
     
     const colorMap = {
@@ -25,5 +27,5 @@ browser.tabs.query({ active: true, currentWindow: true })
   })
   .catch(error => {
     console.error('Error:', error);
+    ratingElement.textContent = 'Error a la hora de cargar datos';
   });
-
